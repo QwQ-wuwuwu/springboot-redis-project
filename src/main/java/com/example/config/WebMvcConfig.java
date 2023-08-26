@@ -1,2 +1,26 @@
-package com.example.config;public class WebMvcConfig {
+package com.example.config;
+
+import com.example.interceptor.LoginInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebMvcConfig implements WebMvcConfigurer {
+    @Autowired
+    private LoginInterceptor loginInterceptor;
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/api/**")
+                .excludePathPatterns(
+                        "/api/login",
+                        "/api/code",
+                        "/api/tickets",
+                        "/api/ticket/{id}",
+                        "/api/coupon",
+                        "/api/coupon/{id}",
+                        "/api/couponAs/{id}"
+                );
+    }
 }

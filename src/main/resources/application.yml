@@ -1,1 +1,36 @@
+spring:
+  application:
+    name: redis-project
+  data:
+    redis:
+      port: 6379
+      host: 192.168.1.17
+      password: 532129
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: 1000ms
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/database_01
+    username: root
+    password: 532129
+  jpa:
+    show-sql: true #显示自动生成的sql语句
+    hibernate:
+      ddl-auto: update #数据表不存在则创建，存在则更新
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect #方言，解决相同操作但不同数据库带来的sql语句差异
 
+logging:
+  level:
+    com.example: debug
+  pattern:
+    dateformat: mm:ss
+my:
+  secretKey: q12w34e56r78
+server:
+  port: 8081
